@@ -5,8 +5,7 @@
 *.py[cod]
 
 
-# avoid them adding new wav files
-*.wav
+
 
 # misc others
 .DS_Store
