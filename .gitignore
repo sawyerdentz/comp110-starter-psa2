@@ -1,0 +1,13 @@
+# ignore vscode hidden directory
+.vscode
+
+# ignore python cache, object, etc. files
+*.py[cod]
+
+
+# avoid them adding new wav files
+*.wav
+
+# misc others
+.DS_Store
+*.swp
