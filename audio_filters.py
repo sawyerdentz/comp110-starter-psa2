@@ -2,8 +2,8 @@
 Module: audio_filters
 
 Authors:
-1) Name - USD Email Address
-2) Name - USD Email Address
+1) Sawyer Dentz - sdentz@sandiego.edu
+2) Matthew Oderlin - moderlin@sandiego.edu
 """
 
 import sound
@@ -20,55 +20,90 @@ def remove_vocals(original_sound):
     Sound object - Same sound as the original, but with vocals removed
     """
 
-    pass  # Remove this "do nothing" statement when you start implementing.
-
+    new_sound = original_sound.copy()
+    new_value = 0
+    for i in range(len(new_sound)):
+        new_value = int((new_sound[i].left - new_sound[i].right) / 2)
+        new_sound[i].left = new_value
+        new_sound[i].right = new_value
+    return new_sound
 
 def fade_in(original_sound, fade_length):
     """
-    Replace this with a good docstring comment.
+    Creates a new sound object that is the same as the given sound, but with a fade in effect
 
     Parameters:
-
+    original_sound (type: Sound) - The original Sound object
+    fade_length (type: Int) - An integer indicating the number of samples to which the fade-in will be applied
+    
     Returns:
+    Sound object - Same sound as the original, but with a fade in effect
     """
 
-    pass  # Remove this "do nothing" statement when you start implementing.
+    new_sound = original_sound.copy()
+    for i in range(fade_length):
+        divisor = i / fade_length
+        new_sound[i].left = int(new_sound[i].left * divisor)
+        new_sound[i].right = int(new_sound[i].right * divisor)
+    return new_sound
 
 
 def fade_out(original_sound, fade_length):
     """
-    Replace this with a good docstring comment.
+    Creates a new sound object that is the same as the given sound, but with a fade out effect
 
     Parameters:
-
+    original_sound (type: Sound) - The original Sound object
+    fade_length (type: Int) - An integer indicating the number of samples to which the fade-out will be applied
+    
     Returns:
+    Sound object - Same sound as the original, but with a fade out effect
     """
 
-    pass  # Remove this "do nothing" statement when you start implementing.
+    new_sound = original_sound.copy()
+    for i in range(fade_length):
+        divisor = i / fade_length
+        new_sound[-i].left = int(new_sound[-i].left * divisor)
+        new_sound[-i].right = int(new_sound[-i].right * divisor)
+    return new_sound
 
 
 def fade(original_sound, fade_length):
     """
-    Replace this with a good docstring comment.
+    Creates a new sound object that is the same as the given sound, but with a fade out and fade in effect
 
     Parameters:
+    original_sound (type: Sound) - The original Sound object
+    fade_length (type: Int) - An integer indicating the number of samples to which the fade-out and fade-in will be applied
 
     Returns:
+    Sound object - Same sound as the original, but with a fade out and fade in effect
     """
 
-    pass  # Remove this "do nothing" statement when you start implementing.
+    new_sound = original_sound.copy()
+    new_sound = fade_in(new_sound, fade_length)
+    new_sound = fade_out(new_sound, fade_length)
+    return new_sound
 
 
 def left_to_right(original_sound, pan_length):
     """
-    Replace this with a good docstring comment.
+    Creates a new sound object that is the same as the given sound, but with a panning effect from the left speaker to the right speaker
 
     Parameters:
+    original_sound (type: Sound) - The original Sound object
+    pan_length (type: Int) - An integer indicating the number of samples to which the panning effect will be applied
 
     Returns:
+    Sound object - Same sound as the original, but with a panning effect from the left speaker to the right speaker
+
     """
 
-    pass  # Remove this "do nothing" statement when you start implementing.
+    new_sound = original_sound.copy()
+    for i in range(len(new_sound)):
+        new_sound[i].left = int(new_sound[i].left * (len(new_sound) - i) / len(new_sound))
+        new_sound[i].right = int(new_sound[i].right * (i / len(new_sound)))
+    return new_sound
 
 
 # Your final submission should NOT contain any global code.
